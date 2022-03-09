@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  hawking-api:
+    container_name: hawking-api
+    build: 
+      context: ./api
+    ports:
+      - 3001:3000
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    # depends_on:
+    #   - jupter-nginx-server
