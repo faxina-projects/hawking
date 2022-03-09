@@ -10,5 +10,41 @@ services:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
-    # depends_on:
-    #   - jupter-nginx-server
+    depends_on:
+      - hawking-elasticsearch
+      - hawking-kibana
+    networks:
+      - hawking-network
+  hawking-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      xpack.monitoring.enabled: "false"
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data   
+    networks:
+      - hawking-network 
+  hawking-kibana:
+    image: docker.elastic.co/kibana/kibana:7.7.0
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://hawking-elasticsearch:9200
+    depends_on:
+      - hawking-elasticsearch
+    networks:
+      - hawking-network
+      
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  hawking-network:
+    driver: bridge
+
+
