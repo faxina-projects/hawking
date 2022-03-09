@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "elasticsearch": "^16.7.3"
-  },
-  "devDependencies": {
-    "@types/elasticsearch": "^5.0.40"
-  }
-}
