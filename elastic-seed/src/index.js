@@ -1,30 +1,37 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 var dotenv = require('dotenv');
 dotenv.config();
-var elasticsearch = require('elasticsearch');
+var elasticsearch = require('@elastic/elasticsearch');
 var fs = require('fs');
 
 async function run() {
   var client = new elasticsearch.Client({
-    host: `${process.env.ELASTICSEARCH_HOST}:${process.env.ELASTICSEARCH_PORT}`,
-    log: 'trace',
-    apiVersion: '7.2', // use the same version of your Elasticsearch instance
+    node: `http://${process.env.ELASTICSEARCH_HOST}:${process.env.ELASTICSEARCH_PORT}`,
+    auth: {
+      username: 'elastic',
+      password: 'admin',
+    },
   });
 
-  await client.indices.create({
-    index: 'zips',
-    body: {
-      mappings: {
-        properties: {
-          id: { type: 'keyword' },
-          city: { type: 'keyword' },
-          state: { type: 'keyword' },
-          pop: { type: 'integer' },
+  await client.indices.create(
+    {
+      index: 'zips',
+      body: {
+        mappings: {
+          properties: {
+            id: { type: 'text' },
+            city: { type: 'text' },
+            state: { type: 'text' },
+            pop: { type: 'integer' },
+          },
         },
       },
     },
-    ignore: [400],
-  });
+    {
+      ignore: [404],
+      maxRetries: 3,
+    },
+  );
   const jsonContent = fs.readFileSync(`${__dirname}/data/data.json`, 'utf8');
   const dataset = JSON.parse(jsonContent).dataset;
   const body = dataset.flatMap((doc) => [
