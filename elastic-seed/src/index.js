@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+var dotenv = require('dotenv');
+dotenv.config();
 var elasticsearch = require('elasticsearch');
 var fs = require('fs');
 
 async function run() {
   var client = new elasticsearch.Client({
-    host: 'hawking-elasticsearch:9200',
+    host: `${process.env.ELASTICSEARCH_HOST}:${process.env.ELASTICSEARCH_PORT}`,
     log: 'trace',
     apiVersion: '7.2', // use the same version of your Elasticsearch instance
   });
