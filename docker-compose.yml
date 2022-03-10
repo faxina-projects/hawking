@@ -16,6 +16,7 @@ services:
     networks:
       - hawking-network
   elasticsearch:
+    container_name: hawking-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
     ports:
       - "9200:9200"
@@ -29,6 +30,7 @@ services:
     networks:
       - hawking-network 
   hawking-kibana:
+    container_name: hawking-kibana
     image: docker.elastic.co/kibana/kibana:7.7.0
     ports:
       - "5601:5601"
