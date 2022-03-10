@@ -1,3 +1,6 @@
+import 'module-alias/register';
+import '@/infra/config/env.config';
+
 import { App } from './infra/app';
 import { appConfig } from './infra/config';
 
