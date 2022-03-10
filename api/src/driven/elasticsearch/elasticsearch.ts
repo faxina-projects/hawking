@@ -51,12 +51,6 @@ class Elasticsearch implements SearchEngine {
         maxRetries: 3,
       },
     );
-
-    console.log('HEY');
-    console.log(text);
-    console.log(fields);
-    console.log(response);
-    console.log(response.hits);
     return this.parseElasticResponse(response as SearchResponse<Location>);
   };
 }
