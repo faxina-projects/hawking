@@ -15,6 +15,23 @@ services:
       - hawking-kibana
     networks:
       - hawking-network
+  hawking-elasticsearch-seed:
+    container_name: hawking-elasticsearch-seed
+    command: sh wait_to_start.sh
+    build: 
+      context: ./elastic-seed
+    volumes:
+      - ./elastic-seed:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - elasticsearch
+    networks:
+      - hawking-network
+    environment:
+      - WAIT_COMMAND=[ $$(curl --write-out %{http_code} --silent --output /dev/null http://elastic:9200/_cat/health?h=st) = 200 ]
+      - WAIT_START_CMD=python access_elastic_search.py
+      - WAIT_SLEEP=2
+      - WAIT_LOOPS=10
   elasticsearch:
     container_name: hawking-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
