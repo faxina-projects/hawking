@@ -1,3 +1,4 @@
+import cors from 'cors';
 import Express, { Application, json, urlencoded } from 'express';
 import helmet from 'helmet';
 
@@ -17,6 +18,7 @@ class App {
   }
 
   private initMiddlewares = (): void => {
+    this.server.use(cors());
     this.server.use(helmet());
     this.server.use(urlencoded({ extended: true }));
 
