@@ -1,5 +1,5 @@
 import { Client } from '@elastic/elasticsearch';
-import { SearchResponse } from 'elasticsearch';
+import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
 
 import { SearchEngine } from '@/core/application/search';
 import { Location } from '@/core/application/search/location';
@@ -51,7 +51,7 @@ class Elasticsearch implements SearchEngine {
         maxRetries: 3,
       },
     );
-    return this.parseElasticResponse(response as SearchResponse<Location>);
+    return this.parseElasticResponse(response);
   };
 }
 

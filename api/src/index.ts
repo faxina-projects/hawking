@@ -1,8 +1,8 @@
 import 'module-alias/register';
-import '@/infra/config/env.config';
+import '@/main/config/env.config';
 
-import { App } from './infra/app';
-import { appConfig } from './infra/config';
+import { App } from './main/app';
+import { appConfig } from './main/config';
 
 (async (): Promise<void> => {
   try {
