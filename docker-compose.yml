@@ -5,13 +5,27 @@ services:
     build: 
       context: ./api
     ports:
-      - 3001:3000
+      - 3000:3000
     volumes:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
     depends_on:
       - elasticsearch
+    networks:
+      - hawking-network
+  hawking-front:
+    container_name: hawking-front
+    build: 
+      context: ./front
+    ports:
+      - 3001:3001
+    volumes:
+      - ./front:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    depends_on:
+      - hawking-api
     networks:
       - hawking-network
   elasticsearch:
@@ -47,13 +61,11 @@ services:
   #     - elasticsearch
   #   networks:
   #     - hawking-network
-      
-volumes:
-  esdata:
-    driver: local
 
 networks:
   hawking-network:
-    driver: bridge
-
+    
+volumes:
+  esdata:
+    driver: local
 
