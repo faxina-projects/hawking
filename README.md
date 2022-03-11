@@ -6,10 +6,15 @@
 - React (React)
 
 - [HAWKING](#hawking)
+  - [References](#references)
   - [Requirements](#requirements)
   - [Installation](#installation)
   - [Access](#access)
     - [Application](#application)
+  
+### References
+- https://betterprogramming.pub/your-first-elasticsearch-application-7db5ea74ef02
+- https://henriquemauri.net/configurando-o-elasticsearch-e-kibana-no-docker-3f4679eb5feb/
 
 ## Requirements
 
@@ -18,7 +23,7 @@
 
 ## Installation
 
-### APP
+### App
 - Clone this repository
 
 ```bash
@@ -36,7 +41,7 @@ $ cd hawking
 ```bash
 $ docker-compose up --build
 ```
-### INSERT DATA TO ELASTICSEARCH
+### Insert data to elasticsearch
 - Access the seed folder
 
 ```bash
