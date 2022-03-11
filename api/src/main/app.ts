@@ -18,7 +18,11 @@ class App {
   }
 
   private initMiddlewares = (): void => {
-    this.server.use(cors());
+    this.server.use(
+      cors({
+        origin: ['http://localhost:3001'],
+      }),
+    );
     this.server.use(helmet());
     this.server.use(urlencoded({ extended: true }));
 
