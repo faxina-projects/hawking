@@ -19,9 +19,10 @@ function App() {
   const [zips, setZips] = useState<Record[]>([]);
   useEffect(() => {
     axios
-      .get<ResponseData>(`http://localhost:3001/search?text=${queryText}`)
+      .get<ResponseData>(
+        `${process.env.REACT_APP_API_HOST}/search?text=${queryText}`,
+      )
       .then((result) => {
-        console.log(result);
         const { data } = result.data;
         const tempZips = data.map((record) => {
           return { id: record.id, city: record.city, state: record.state };
@@ -29,6 +30,7 @@ function App() {
         setZips(tempZips);
       });
   }, [queryText, setZips]);
+
   return (
     <div className="App">
       <SearchBox placeholder="Search Elasticsearch" onChange={setQueryText} />
