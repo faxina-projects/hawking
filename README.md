@@ -18,8 +18,8 @@
 
 ## Requirements
 
-- [Docker](https://www.docker.com/get-started) (Windows)
-- [Docker Compose](https://docs.docker.com/compose/install/) (Linux)
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Installation
 
