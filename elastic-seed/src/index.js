@@ -8,8 +8,8 @@ async function run() {
   var client = new elasticsearch.Client({
     node: `http://${process.env.ELASTICSEARCH_HOST}:${process.env.ELASTICSEARCH_PORT}`,
     auth: {
-      username: 'elastic',
-      password: 'admin',
+      username: process.env.ELASTICSEARCH_USERNAME,
+      password: process.env.ELASTICSEARCH_PASSWORD,
     },
   });
 

@@ -13,8 +13,8 @@ class Elasticsearch implements SearchEngine {
     this.client = new Client({
       node: `http://${elasticsearchConfig.host}:${elasticsearchConfig.port}`,
       auth: {
-        username: 'elastic',
-        password: 'admin',
+        username: elasticsearchConfig.username,
+        password: elasticsearchConfig.password,
       },
     });
   }
