@@ -36,7 +36,7 @@ $ cd hawking
 ```bash
 $ docker-compose up --build
 ```
-### SEED TO INSERT DATA TO ELASTICSEARCH
+### INSERT DATA TO ELASTICSEARCH
 - Access the seed folder
 
 ```bash
