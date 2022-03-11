@@ -2,7 +2,8 @@ import Express, { Application, json, urlencoded } from 'express';
 import helmet from 'helmet';
 
 import { healthCheckController } from '@/driver/controller';
-import { searchCheckController } from '@/driver/controller/search.controller';
+
+import { SearchControllerFactory } from './factories';
 
 class App {
   private server: Application;
@@ -24,7 +25,7 @@ class App {
 
   private initRoutes = (): void => {
     this.server.use('/', healthCheckController.router);
-    this.server.use('/', searchCheckController.router);
+    this.server.use('/', SearchControllerFactory.create().router);
   };
 
   public listen = async (): Promise<void> => {

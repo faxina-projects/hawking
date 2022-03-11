@@ -1,13 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { SearchEngine } from '@/core/application/search';
-import { ElasticsearchFactory } from '@/driven/elasticsearch';
+import { ISearchService } from '@/core/application/search/search.service.interface';
 
 import { HttpSuccessResponseDTO } from '../presentation/dtos';
 import { BaseController } from './base.controller';
 
-class SearchCheckController extends BaseController {
-  constructor(private readonly searchEngine: SearchEngine) {
+class SearchController extends BaseController {
+  constructor(private readonly searchService: ISearchService) {
     super('/search');
 
     this.initializeRoutes();
@@ -20,10 +19,7 @@ class SearchCheckController extends BaseController {
   ): Promise<void> => {
     const { text = '' } = request.query;
 
-    const data = await this.searchEngine.search(
-      ['city', 'state', 'id'],
-      text as string,
-    );
+    const data = await this.searchService.search(text as string);
 
     const responseData = new HttpSuccessResponseDTO(data);
 
@@ -35,8 +31,4 @@ class SearchCheckController extends BaseController {
   };
 }
 
-const searchCheckController = new SearchCheckController(
-  ElasticsearchFactory.create(),
-);
-
-export { searchCheckController };
+export { SearchController };
